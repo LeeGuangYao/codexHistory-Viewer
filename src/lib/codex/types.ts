@@ -1,0 +1,4 @@
+export interface CodexThread {id:string;sessionId?:string;title:string;preview:string;cwd?:string;model?:string;createdAt?:number;updatedAt?:number;sourceFiles:string[];primaryFile?:string;messageCount:number;hasThinking:boolean;hasToolCalls:boolean;hasTerminalOutput:boolean;hasCodeChanges:boolean;hasErrors:boolean;raw?:unknown}
+export interface CodexMessage {id:string;threadId:string;role:'user'|'assistant'|'system'|'tool'|'terminal'|'unknown';type:'text'|'markdown'|'code'|'table'|'diff'|'terminal-output'|'tool-call'|'thinking-placeholder'|'error'|'unknown';content:string;command?:string;language?:string;createdAt?:number;metadata?:Record<string,unknown>;raw?:unknown}
+export interface ParseDiagnostic {file:string;line?:number;level:'info'|'warning'|'error';message:string}
+export interface ParsedCodexHistory {threads:CodexThread[];messagesByThreadId:Record<string,CodexMessage[]>;diagnostics:ParseDiagnostic[]}

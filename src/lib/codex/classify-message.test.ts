@@ -1,0 +1,2 @@
+import { describe,it,expect } from 'vitest';import { classifyContent,isThinking } from './classify-message';
+describe('classify',()=>{it('table',()=>expect(classifyContent('|a|b|\n|-|-|','assistant')).toBe('table'));it('code',()=>expect(classifyContent('```ts\n1\n```','assistant')).toBe('code'));it('diff',()=>expect(classifyContent('diff --git a b','assistant')).toBe('diff'));it('thinking',()=>expect(isThinking({type:'reasoning'})).toBe(true));})
