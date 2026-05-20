@@ -1,0 +1,2 @@
+import { NextRequest, NextResponse } from 'next/server';import { getStore } from '@/src/lib/codex/history-store';import { getResumeCommand } from '@/src/lib/codex/resume-command';
+export function GET(_:NextRequest,{params}:{params:{threadId:string}}){const s=getStore();const t=s.threads.find((x:any)=>x.id===params.threadId);if(!t)return NextResponse.json({canResume:false,reason:'not found'});return NextResponse.json(getResumeCommand({sessionId:t.sessionId,cwd:t.cwd}))}

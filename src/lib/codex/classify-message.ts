@@ -1,0 +1,2 @@
+export function isThinking(raw: unknown): boolean {const s=JSON.stringify(raw).toLowerCase();return /(thinking|reasoning|analysis|chain_of_thought|\bcot\b|internal_reasoning)/.test(s)}
+export function classifyContent(content:string, role:string){if(/diff --git|\n\+\+\+|\n---|\n@@/.test(content))return 'diff';if(/\|.+\|/.test(content)&&/\|\s*[-:]+/.test(content))return 'table';if(/```/.test(content))return 'code';if(/(^|\n)\s*([>#*-]|\d+\.)|\[[^\]]+\]\([^)]+\)/.test(content)||role==='assistant')return 'markdown';return 'text'}

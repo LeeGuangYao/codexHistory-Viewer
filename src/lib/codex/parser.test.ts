@@ -1,0 +1,2 @@
+import { describe,it,expect } from 'vitest';import fs from 'node:fs';import os from 'node:os';import path from 'node:path';import { parseFiles } from './parser';
+describe('parser',()=>{it('parse and tolerate bad line',()=>{const d=fs.mkdtempSync(path.join(os.tmpdir(),'codex-'));const f=path.join(d,'a.jsonl');fs.writeFileSync(f,'{"role":"user","content":"hello"}\n{bad}\n{"role":"assistant","content":"# hi"}');const r=parseFiles([f]);expect(r.threads.length).toBe(1);expect(r.diagnostics.length).toBe(1);});})

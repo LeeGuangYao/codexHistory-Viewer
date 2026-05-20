@@ -1,0 +1,3 @@
+import { z } from 'zod'
+const schema=z.object({sessionId:z.string().min(1).optional(),cwd:z.string().optional()})
+export function getResumeCommand(input:unknown){const p=schema.parse(input);if(!p.sessionId)return {canResume:false,reason:'无法识别 sessionId，不能生成 codex resume 命令。'};const posix=p.cwd?`cd ${JSON.stringify(p.cwd)} && codex resume ${p.sessionId}`:`codex resume ${p.sessionId}`;const powershell=p.cwd?`Set-Location -LiteralPath ${JSON.stringify(p.cwd)}; codex resume ${p.sessionId}`:`codex resume ${p.sessionId}`;return {canResume:true,sessionId:p.sessionId,cwd:p.cwd,posixCommand:posix,powershellCommand:powershell}}
